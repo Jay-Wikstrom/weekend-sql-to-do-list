@@ -28,3 +28,4 @@ const pool = new pg.Pool(config);
 //DELETE
 
 
+module.exports = router;
