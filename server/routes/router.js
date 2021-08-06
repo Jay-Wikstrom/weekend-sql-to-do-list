@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const pg = require('pg');
 
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 const config = {
     database: 'weekend-to-do-app',
     host: 'localhost',
@@ -44,7 +50,7 @@ router.post('/', (req, res) => {
     let sqlParams = [
         req.body.task,
         req.body.complete
-    ]
+    ];
     console.log('sqlQuery', sqlQuery);
 
     pool.query(sqlQuery, sqlParams)
@@ -61,9 +67,32 @@ router.post('/', (req, res) => {
 
 })
 
-//PUT
+//PUT 
 
+router.put('/:id', (req, res) => {
+    console.log('params', req.params);
+    console.log('complete param', req.body.isComplete);
+    //let complete = req.params.complete;
+    //console.log('complete check', complete);
+    let sqlQuery = `
+    UPDATE "todo" SET "complete" = $1 WHERE id = $2;
+  `;
 
+    let sqlParams = [
+        req.body.isComplete, // $1
+        req.params.id  // $2
+    ]
+
+    pool.query(sqlQuery, sqlParams)
+        .then((dbRes) => {
+            console.log('Send complete', dbRes);
+            res.send(201);
+        })
+        .catch((error) => {
+            console.log("post error", error);
+            res.sendStatus(500);
+        });
+});
 
 //DELETE
 
@@ -81,6 +110,5 @@ router.delete('/:id', (req, res) => {
             res.sendStatus(500)
         })
 });
-
 
 module.exports = router;
