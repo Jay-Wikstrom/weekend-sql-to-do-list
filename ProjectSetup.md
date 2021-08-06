@@ -19,8 +19,9 @@
 				[x] router.js
 
 [ ]html (front end)
-	[ ] input (allow used to create task)
-	[ ] button for complete (probably do in client)
+	[x] input (allow used to create task)
+    [x] button for create task
+ 	[ ] button for complete (probably do in client)
 	[ ] button for delete (probably do in client)
 
 [ ]set up server
