@@ -21,6 +21,7 @@ function getTaskData(){
             $('#toDoList').append(`
                 <tr data-id="${response[i].id}">
                     <td>${response[i].task}</td>
+                    <td>${response[i].complete}</td>
                     <td><button class="deleteBtn">Delete</button>
                 </tr>
             `);

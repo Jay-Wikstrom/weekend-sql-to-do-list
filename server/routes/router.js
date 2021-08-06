@@ -37,12 +37,13 @@ router.post('/', (req, res) => {
 
     let sqlQuery = `
     INSERT INTO 
-        "todo"("task")
+        "todo"("task", "complete")
     VALUES
-        ($1)
+        ($1, $2)
     `;
     let sqlParams = [
-        req.body.task
+        req.body.task,
+        req.body.complete
     ]
     console.log('sqlQuery', sqlQuery);
 
