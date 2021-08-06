@@ -11,8 +11,8 @@ app.use(express.static('server/public'));
 // Serve back static files by default
 app.use(express.static('server/public'))
 
-//Connect Routes after router setup
-
+//Routes
+app.use('/todo', router);
 
 //Start listening for requests on port 5000
 app.listen(PORT, () => {

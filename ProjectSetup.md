@@ -25,25 +25,24 @@
 	[ ] button for delete (probably do in client)
 
 [ ]set up server
-	[ ] const express
-	[ ] const app = express
-	[ ] const bodyParser = 
-	[ ] const port 5000
-	[ ] const router
-	[ ] app use body parser url encoded
-	[ ] app use body parser json
-	[ ] app use express static
-	[ ] app use router
-	[ ] app listen
+	[x] const express
+	[x] const app = express
+	[x] const bodyParser = 
+	[x] const port 5000
+	[x] const router
+	[x] app use body parser url encoded
+	[x] app use body parser json
+	[x] app use express static
+	[x] app use router
+	[x] app listen
 
 Link routes to server
-	[ ] const express
-	[ ] const router
-	[ ] const pg
-	[ ] bodyparser
-	[ ] app = express
-	[ ] DB connection
-    [ ] pool
+	[x] const express
+	[x] const router
+	[x] const pg
+	[x] npm install pg
+	[x] DB connection
+    [x] pool
 
 Client 
 	[ ] setup on ready
