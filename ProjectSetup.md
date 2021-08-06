@@ -5,7 +5,7 @@
 	[x]body parser
 	[x] npm start in json
     [x] git ignore aka no black holes set to github
-    [ ] create db is postico
+    [x] create database is postico
 	[x]set up files 
 		[x]server
 			[x] server.js 
