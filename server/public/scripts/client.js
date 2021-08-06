@@ -4,6 +4,7 @@ $(document).ready(onReady);
 
 function onReady() {
     console.log('On ready test');
+    getTaskData();
     $(document).on('click', '.submitBtn', postTaskData);
 }
 
@@ -14,6 +15,7 @@ function getTaskData(){
     }).then(function(response){
         console.log('The resonse is', response);
 
+        $('#toDoList').empty();
         for (let i = 0; i < response.length; i++){
             $('#toDoList').append(`
                 <tr>
@@ -29,7 +31,7 @@ function postTaskData(){
     let toDoList = {
         task: $('#createTaskIn').val()
     }; //end toDoList object
-    $ajax({
+    $.ajax({
         type: 'POST',
         url: '/todo',
         data: toDoList
