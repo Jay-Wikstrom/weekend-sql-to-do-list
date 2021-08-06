@@ -45,15 +45,15 @@ Link routes to server
     [x] pool
 
 Client 
-	[ ] setup on ready
-	[ ] ajax for get
-	[ ] ajax for post
+	[x] setup on ready
+	[x] ajax for get
+	[x] ajax for post
 	[ ] ajax for put
-	[ ] ajax for delete
+	[x] ajax for delete
 
 Routes
-    [ ] GET
-    [ ] POST
+    [x] GET
+    [x] POST
     [ ] PUT
-    [ ] DELETE
-    [ ] module export
+    [x] DELETE
+    [x] module export

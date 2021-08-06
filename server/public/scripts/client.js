@@ -6,6 +6,7 @@ function onReady() {
     console.log('On ready test');
     getTaskData();
     $(document).on('click', '.submitBtn', postTaskData);
+    $('#toDoList').on('click', '.deleteBtn', deleteTask);
 }
 
 function getTaskData(){
@@ -18,8 +19,9 @@ function getTaskData(){
         $('#toDoList').empty();
         for (let i = 0; i < response.length; i++){
             $('#toDoList').append(`
-                <tr>
+                <tr data-id="${response[i].id}">
                     <td>${response[i].task}</td>
+                    <td><button class="deleteBtn">Delete</button>
                 </tr>
             `);
         } //end for loop
@@ -39,5 +41,17 @@ function postTaskData(){
         $('#createTaskIn').val('')
         getTaskData();
     });
+}
+
+function deleteTask() {
+    let taskId = $(this).closest('tr').data('id')
+    //.parents('tr');
+    console.log('taskId is', taskId)
+    $.ajax({
+        type: 'DELETE',
+        url: `/todo/${taskId}`,
+    }).then(function (res) {
+        getTaskData();
+    })
 }
 
