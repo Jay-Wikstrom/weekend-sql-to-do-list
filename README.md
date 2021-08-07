@@ -1,9 +1,9 @@
 # Project Name
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+Weekend SQL To DO List
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+I created a todo list that you can add tasks to.  The tasks will be stored on a database until you decide to delete them.
 
 Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).

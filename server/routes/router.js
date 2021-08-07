@@ -10,6 +10,7 @@ const config = {
     idleTimeoutMillis: 30000
 };
 
+//Create a connection "pool" to postgres DB
 const pool = new pg.Pool(config);
 
 
@@ -20,6 +21,7 @@ router.get('/', (req, res) => {
         ORDER BY "task"
     `;
 
+    //Send db results to the client
     pool.query(sqlQuery)
         .then((dbRes) => {
             console.log('dbRes.rows', dbRes.rows);
@@ -47,6 +49,7 @@ router.post('/', (req, res) => {
     ];
     console.log('sqlQuery', sqlQuery);
 
+    //Send the query to the DB
     pool.query(sqlQuery, sqlParams)
         .then((dbRes) => {
             res.sendStatus(201); //Created
@@ -61,6 +64,9 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
     console.log('params', req.params);
     console.log('complete param', req.body.isComplete);
+
+    //SET "complete = req.body.complete
+    // WHERE id = req.params.id
     let sqlQuery = `
         UPDATE "todo" 
         SET "complete" = $1 

@@ -18,13 +18,13 @@
 			[x] routes
 				[x] router.js
 
-[ ]html (front end)
+[x]html (front end)
 	[x] input (allow used to create task)
     [x] button for create task
- 	[ ] button for complete (probably do in client)
-	[ ] button for delete (probably do in client)
+ 	[x] button for complete (probably do in client)
+	[x] button for delete (probably do in client)
 
-[ ]set up server
+[x]set up server
 	[x] const express
 	[x] const app = express
 	[x] const bodyParser = 
@@ -48,12 +48,12 @@ Client
 	[x] setup on ready
 	[x] ajax for get
 	[x] ajax for post
-	[ ] ajax for put
+	[x] ajax for put
 	[x] ajax for delete
 
 Routes
     [x] GET
     [x] POST
-    [ ] PUT
+    [x] PUT
     [x] DELETE
     [x] module export

@@ -10,14 +10,16 @@ function onReady() {
     $('#toDoList').on('click', '#deleteBtn', deleteTask);
 }
 
+//Get data from the server
 function getTaskData(){
     $.ajax({
         type: 'GET',
         url: '/todo'
     }).then(function(response){
         tasks = response;
-        console.log('The resonse is', response);
+        console.log('The response is', response);
 
+        //append data to the DOM
         $('#toDoList').empty();
         for (let i = 0; i < response.length; i++){
             if (response[i].complete === false || response[i].complete === null){
@@ -45,6 +47,7 @@ function getTaskData(){
 
 function postTaskData(){
     console.log('button clicked');
+    //req.body
     let toDoList = {
         task: $('#createTaskIn').val(),
     }; //end toDoList object
@@ -64,23 +67,19 @@ function postTaskData(){
 function updateTask() {
     let id = $(this).closest('tr').data('id');
     let isComplete = $(this).closest('tr').data('complete');
-    let task = $(this).closest('td').data('task');
     console.log('isComplete', isComplete);
 
     if (isComplete === false || isComplete === null) {
         isComplete = true;
     } 
-//     else if (isComplete === true) {
-//        isComplete = false;
-//    }
 
     $.ajax({
         type: 'PUT',
-        url: `/todo/${id}`,
-        data: {isComplete: isComplete}
+        url: `/todo/${id}`,                     //id becomes req.params.id
+        data: {isComplete: isComplete}          //data becomes req.body
     }).then(function (response) {
         console.log('response', response)
-        getTaskData();
+        getTaskData();                          //refresh the data
     }).catch(function (error) {
         console.log('error in PUT', error);
     });
