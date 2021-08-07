@@ -1,7 +1,5 @@
 console.log('js');
 
-let tasks = [];
-
 $(document).ready(onReady);
 
 function onReady() {
@@ -22,14 +20,23 @@ function getTaskData(){
 
         $('#toDoList').empty();
         for (let i = 0; i < response.length; i++){
-            $('#toDoList').append(`
-                <tr data-id="${response[i].id}" data-complete=${response[i].complete}>
-                    <td>${response[i].task}</td>
-                    <td>${response[i].complete}</td>
-                    <td><button id="completeBtn">Complete Task</button>
-                    <td><button id="deleteBtn">Delete</button>
-                </tr>
-            `);
+            if (response[i].complete === false || response[i].complete === null){
+                $('#toDoList').append(`
+                    <tr data-id="${response[i].id}" data-complete=${response[i].complete}>
+                        <td id="task">${response[i].task}</td>
+                        <td><button id="completeBtn">Complete Task</button>
+                        <td><button id="deleteBtn">Delete</button>
+                    </tr>
+                `);
+            } else if (response[i].complete === true){
+                $('#toDoList').append(`
+                    <tr data-id="${response[i].id}" data-complete=${response[i].complete}>
+                        <td id="task" class="completeTask">${response[i].task}</td>
+                        <td><button id="completeBtn">Complete Task</button>
+                        <td><button id="deleteBtn">Delete</button>
+                    </tr>
+                `);
+            }
         } //end for loop
     }).catch(function(error){
         console.log('error in client', error);
@@ -54,21 +61,19 @@ function postTaskData(){
     })
 }
 
-
-
 function updateTask() {
-    
     let id = $(this).closest('tr').data('id');
     let isComplete = $(this).closest('tr').data('complete');
+    let task = $(this).closest('td').data('task');
     console.log('isComplete', isComplete);
 
     if (isComplete === false || isComplete === null) {
         isComplete = true;
-    } else if (isComplete === true) {
-        isComplete = false;
-    }
+    } 
+//     else if (isComplete === true) {
+//        isComplete = false;
+//    }
 
-    
     $.ajax({
         type: 'PUT',
         url: `/todo/${id}`,

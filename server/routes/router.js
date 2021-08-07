@@ -2,12 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pg = require('pg');
 
-const bodyParser = require('body-parser');
-
-const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 const config = {
     database: 'weekend-to-do-app',
     host: 'localhost',
@@ -19,16 +13,17 @@ const config = {
 const pool = new pg.Pool(config);
 
 
-//GET
-
+//GET 
 router.get('/', (req, res) => {
     let sqlQuery = `
         SELECT * FROM "todo"
+        ORDER BY "task"
     `;
+
     pool.query(sqlQuery)
         .then((dbRes) => {
             console.log('dbRes.rows', dbRes.rows);
-            res.send(dbRes.rows);
+            res.send(dbRes.rows); 
         })
         .catch((error) => {
             console.log('error', error);
@@ -36,8 +31,7 @@ router.get('/', (req, res) => {
         });
 });
 
-//POST
-
+//POST 
 router.post('/', (req, res) => {
     console.log('looking at req.body', req.body.task);
 
@@ -48,34 +42,29 @@ router.post('/', (req, res) => {
         ($1, $2)
     `;
     let sqlParams = [
-        req.body.task,
-        req.body.complete
+        req.body.task,              //$1
+        req.body.complete           //$2
     ];
     console.log('sqlQuery', sqlQuery);
 
     pool.query(sqlQuery, sqlParams)
         .then((dbRes) => {
-
             res.sendStatus(201); //Created
         })
         .catch((error) => {
-
             console.log('SQL failed', error);
             res.sendStatus(500);
-
         });
-
-})
+});
 
 //PUT 
-
 router.put('/:id', (req, res) => {
     console.log('params', req.params);
     console.log('complete param', req.body.isComplete);
-    //let complete = req.params.complete;
-    //console.log('complete check', complete);
     let sqlQuery = `
-    UPDATE "todo" SET "complete" = $1 WHERE id = $2;
+        UPDATE "todo" 
+        SET "complete" = $1 
+        WHERE id = $2;
   `;
 
     let sqlParams = [
@@ -95,11 +84,14 @@ router.put('/:id', (req, res) => {
 });
 
 //DELETE
-
 router.delete('/:id', (req, res) => {
     const idToDelete = req.params.id
     console.log(idToDelete)
-    let sqlQuery = 'DELETE FROM "todo" WHERE id=$1;'
+    let sqlQuery = `
+        DELETE FROM "todo" 
+        WHERE id=$1
+    `;
+    
     let sqlParams = [idToDelete]
     pool.query(sqlQuery, sqlParams)
         .then((dbRes) => {
