@@ -31,7 +31,7 @@ function getTaskData(){
             } else if (response[i].complete === true){
                 $('#toDoList').append(`
                     <tr data-id="${response[i].id}" data-complete=${response[i].complete}>
-                        <td id="task" class="completeTask">${response[i].task}</td>
+                        <td id="task" class="completeTask" class="moveTask">${response[i].task}</td>
                         <td><button id="completeBtn">Complete Task</button>
                         <td><button id="deleteBtn">Delete</button>
                     </tr>
