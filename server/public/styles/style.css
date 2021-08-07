@@ -7,6 +7,25 @@ th {
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+h1{
+    text-align: center;
+}
+
 .completeTask{
-    color: green;
+    background-color: green;
+    color: white;
+}
+#submitBtn {
+    color: white;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+#createTaskIn {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.moveTask{
+    width: 75%;
 }
